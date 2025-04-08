@@ -4,6 +4,10 @@ import { useState } from 'react';
 import { Button } from 'components/button';
 import { RadioGroup } from '../radio-group';
 import { Select } from '../select';
+import { Spacing } from '../spacing';
+import { Text } from '../text';
+import { Separator } from '../separator';
+
 import clsx from 'clsx';
 import styles from './ArticleParamsForm.module.scss';
 import { OptionType, fontSizeOptions, fontFamilyOptions, fontColors, backgroundColors, contentWidthArr } from 'src/constants/articleProps';
@@ -14,7 +18,6 @@ interface ArticleParamsFormProps {
 	onApply: (settings: ArticleStateType) => void;
 	onReset: () => void;
 	currentSettings: ArticleStateType;
-
   }
 
   export const ArticleParamsForm = ({ isOpened, onApply, onReset, currentSettings }: ArticleParamsFormProps)  => {
@@ -68,6 +71,10 @@ interface ArticleParamsFormProps {
 				  onClick={(e) => e.stopPropagation()}>
 				<form className={styles.form} onSubmit={handleSubmit} onReset={onReset}>
 
+				<Text size={31} weight={800} uppercase dynamicLite>Задайте параметры</Text>
+
+				<Spacing size = {50} />
+
 				<Select
 					title="Шрифт"
 					options={fontFamilyOptions}
@@ -75,6 +82,8 @@ interface ArticleParamsFormProps {
 					onChange={handleFontFamilyChange}
 					placeholder="Выберите шрифт"
 				/>
+
+				<Spacing size = {50} />
 
 				<RadioGroup
 					name="font-size"
@@ -86,13 +95,19 @@ interface ArticleParamsFormProps {
 					}
 					/>
 
+				<Spacing size = {50} />
+
 				<Select
-						title="Цвет текста"
+						title="Цвет шрифта"
 						options={fontColors}
 						selected={formState.fontColor}
 						onChange={handleFontColorChange}
 						placeholder="Выберите цвет текста"
 					/>
+
+				<Spacing size = {50} />
+				<Separator/>
+				<Spacing size = {50} />
 
 					<Select
 						title="Цвет фона"
@@ -102,6 +117,8 @@ interface ArticleParamsFormProps {
 						placeholder="Выберите цвет фона"
 					/>
 
+					<Spacing size = {50} />	
+
 					<Select
 							title="Ширина контента"
 							options={contentWidthArr}
@@ -109,6 +126,8 @@ interface ArticleParamsFormProps {
 							onChange={handleContentWidthChange}
 							placeholder="Выберите ширину"
 						/>
+
+				<Spacing size = {50} />
 
 					<div className={styles.bottomContainer}>
 						<Button
