@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
-import { ArrowButton } from 'components/arrow-button';
+//import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
 import { RadioGroup } from '../radio-group';
+import { Select } from '../select';
 import clsx from 'clsx';
 import styles from './ArticleParamsForm.module.scss';
-import { fontSizeOptions } from 'src/constants/articleProps';
+import { OptionType, fontSizeOptions, fontFamilyOptions  } from 'src/constants/articleProps';
 import { ArticleStateType } from '../../constants/articleProps';
 
 interface ArticleParamsFormProps {
@@ -26,9 +27,16 @@ interface ArticleParamsFormProps {
 
 	const handleFormChange = (key: keyof ArticleStateType, value: string) => {
 		setFormState(prev => ({ ...prev, [key]: fontSizeOptions.find(x => x.value === value) }));
-		console.log("changed: ", key, value);
-		setTimeout(() => { console.log("changed: ", formState); }, 1000);
+		//console.log("changed: ", key, value);
+		//setTimeout(() => { console.log("changed: ", formState); }, 1000);
 	};
+
+	const handleFontFamilyChange = (selected: OptionType) => {
+		setFormState(prev => ({
+		  ...prev,
+		  fontFamilyOption: selected // Сохраняем весь объект OptionType
+		}));
+	  };
 
 	return (
 		<>
@@ -38,6 +46,14 @@ interface ArticleParamsFormProps {
 				  })}
 				  onClick={(e) => e.stopPropagation()}>
 				<form className={styles.form} onSubmit={handleSubmit} onReset={onReset}>
+
+				<Select
+					title="Шрифт"
+					options={fontFamilyOptions}
+					selected={formState.fontFamilyOption}
+					onChange={handleFontFamilyChange}
+					placeholder="Выберите шрифт"
+				/>
 
 				<RadioGroup
 					name="font-size"
