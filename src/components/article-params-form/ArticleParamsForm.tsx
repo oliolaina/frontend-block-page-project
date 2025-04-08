@@ -6,7 +6,7 @@ import { RadioGroup } from '../radio-group';
 import { Select } from '../select';
 import clsx from 'clsx';
 import styles from './ArticleParamsForm.module.scss';
-import { OptionType, fontSizeOptions, fontFamilyOptions  } from 'src/constants/articleProps';
+import { OptionType, fontSizeOptions, fontFamilyOptions, fontColors, backgroundColors, contentWidthArr } from 'src/constants/articleProps';
 import { ArticleStateType } from '../../constants/articleProps';
 
 interface ArticleParamsFormProps {
@@ -38,6 +38,27 @@ interface ArticleParamsFormProps {
 		}));
 	  };
 
+	  const handleFontColorChange = (selected: OptionType) => {
+		setFormState(prev => ({
+		  ...prev,
+		  fontColor: selected // Сохраняем весь объект OptionType
+		}));
+	  };
+	
+	  const handleBackgroundColorChange = (selected: OptionType) => {
+		setFormState(prev => ({
+		  ...prev,
+		  backgroundColor: selected
+		}));
+	  };
+
+	  const handleContentWidthChange = (selected: OptionType) => {
+		setFormState(prev => ({
+		  ...prev,
+		  contentWidth: selected // Сохраняем весь объект OptionType
+		}));
+	  };
+
 	return (
 		<>
 			<aside
@@ -64,6 +85,30 @@ interface ArticleParamsFormProps {
 						handleFormChange('fontSizeOption', option.value)
 					}
 					/>
+
+				<Select
+						title="Цвет текста"
+						options={fontColors}
+						selected={formState.fontColor}
+						onChange={handleFontColorChange}
+						placeholder="Выберите цвет текста"
+					/>
+
+					<Select
+						title="Цвет фона"
+						options={backgroundColors}
+						selected={formState.backgroundColor}
+						onChange={handleBackgroundColorChange}
+						placeholder="Выберите цвет фона"
+					/>
+
+					<Select
+							title="Ширина контента"
+							options={contentWidthArr}
+							selected={formState.contentWidth}
+							onChange={handleContentWidthChange}
+							placeholder="Выберите ширину"
+						/>
 
 					<div className={styles.bottomContainer}>
 						<Button
