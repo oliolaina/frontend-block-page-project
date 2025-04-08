@@ -1,0 +1,46 @@
+.container {
+  box-sizing: border-box;
+  position: fixed;
+  top: 31px;
+  display: flex;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-right: 1px;
+  background-color: #000;
+  transition: transform 0.5s ease;
+  z-index: 2;
+
+  &:hover {
+    background-color: #FFC802;
+    border: none;
+  }
+
+  &:active {
+    background-color: #787878;
+    border: none;
+  }
+}
+
+.container_open {
+  transform: translate(616px);
+}
+
+.arrow {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  transform: rotate(180deg);
+  transition: transform 0.5s ease;
+    
+  &open {
+      transform: rotate(180deg);
+    }
+
+}
+
+.arrow_open {
+  transform: translate(616px) rotate(180deg) ;
+}
